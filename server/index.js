@@ -6,13 +6,14 @@ const { Server } = require("socket.io"); // Destructuring to get Server class
 const app = express();
 
 const server = http.createServer(app);
-const port = 4500;
+const port = 4500 ||  process.env.PORT;
+
 const users = {}; // Change to an object to store users by socket ID
 
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("server is runnning");
 });
 
 const io = new Server(server); // Instantiate a new SocketIO server

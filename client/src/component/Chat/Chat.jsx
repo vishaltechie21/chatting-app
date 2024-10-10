@@ -9,7 +9,7 @@ import closeIcon from "../../Images/Close.png";
 
 let socket;
 
-const ENDPOINT = "https://chat-app-in-reactjs.vercel.app/";
+const ENDPOINT = "http://localhost:4500/";
 
 const Chat = () => {
   const [id, setid] = useState("");
@@ -84,7 +84,7 @@ const Chat = () => {
         </ReactScrollToBottom>
         <div className="inputBox">
           <input
-            onClick={(event) => (event.key === "Enter" ? send() : null)}
+            onKeyPress={(event) => (event.key === "Enter" ? send() : null)}
             type="text"
             id="chatInput"
           />

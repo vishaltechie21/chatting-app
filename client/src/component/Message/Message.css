@@ -1,23 +1,32 @@
-.messageBox{
-    padding: 1vmax;
-    margin: 1vmax;
-    border-radius: 0.5vmax;
+.messageBox {
+    padding: 1.2vmax;
+    margin: 1.2vmax 1.5vmax;
+    border-radius: 1vmax; /* More rounded for modern look */
     display: inline-block;
     clear: both;
-    font-size: 1.2vmax;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.right{
+    font-size: 1.1vmax;
+    font-family: monospace;
+    max-width: 60%; /* Restrict width for better readability */
+    word-wrap: break-word; /* Ensure long words don't overflow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Right (user's message) */
+  .right {
     float: right;
-    background-color: crimson;
+    background-color: #d13854; /* Muted crimson for a softer look */
     color: white;
     text-align: right;
-}
-
-.left{
+    border-radius: 1vmax 0 1vmax 1vmax; /* Custom radius for distinctive style */
+  }
+  
+  /* Left (received message) */
+  .left {
     float: left;
     text-align: left;
-    background-color: rgb(196, 255, 184);
-    
-}
+    background-color: #e3ffe7; /* Soft green background for calm tones */
+    color: #333; /* Darker text for better contrast */
+    border-radius: 0 1vmax 1vmax 1vmax;
+  }
+  
+  
