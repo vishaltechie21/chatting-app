@@ -9,7 +9,7 @@ import closeIcon from "../../Images/Close.png";
 
 let socket;
 
-const ENDPOINT = "http://localhost:5000/";
+const ENDPOINT = "https://chatting-app-server-alpha.vercel.app/"
 
 const Chat = () => {
   const [id, setid] = useState("");
