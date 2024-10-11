@@ -1,62 +1,44 @@
-const http = require("http");
-const express = require("express");
+const http=require("http");
+const express =require("express");
 const cors = require("cors");
-const { Server } = require("socket.io"); // Destructuring to get Server class
+const socketIO = require("socket.io");
 
-const app = express();
+const app=express();
+const port= process.env.PORT || 5000;
 
-const server = http.createServer(app);
-const port = 4500 ||  process.env.PORT;
 
-const users = {}; // Change to an object to store users by socket ID
+const users=[{}];
 
 app.use(cors());
+app.get("/",(req,res)=>{
+    res.send("HELL ITS WORKING");
+})
 
-app.get("/", (req, res) => {
-  res.send("server is runnning");
+const server=http.createServer(app);
+
+const io=socketIO(server);
+
+io.on("connection",(socket)=>{
+    console.log("New Connection");
+
+    socket.on('joined',({user})=>{
+          users[socket.id]=user;
+          console.log(`${user} has joined `);
+          socket.broadcast.emit('userJoined',{user:"Admin",message:` ${users[socket.id]} has joined`});
+          socket.emit('welcome',{user:"Admin",message:`Welcome to the chat,${users[socket.id]} `})
+    })
+
+    socket.on('message',({message,id})=>{
+        io.emit('sendMessage',{user:users[id],message,id});
+    })
+
+    socket.on('disconnect',()=>{
+          socket.broadcast.emit('leave',{user:"Admin",message:`${users[socket.id]}  has left`});
+        console.log(`user left`);
+    })
 });
 
-const io = new Server(server); // Instantiate a new SocketIO server
 
-io.on("connection", (socket) => {
-  console.log("New Connection");
-
-  // When a user joins
-  socket.on("joined", ({ user }) => {
-    users[socket.id] = user; // Store the user with their socket ID as the key
-    console.log(`${user} has joined`);
-
-    // Notify other users that someone has joined
-    socket.broadcast.emit("userJoined", {
-      user: "Admin",
-      message: `${users[socket.id]} has joined`,
-    });
-
-    // Welcome the new user
-    socket.emit("welcome", {
-      user: "Admin",
-      message: `Welcome to the chat, ${users[socket.id]}`,
-    });
-  });
-
-  // When a user sends a message
-  socket.on("message", ({ message, id }) => {
-    io.emit("sendMessage", { user: users[id], message, id });
-  });
-
-  // When a user disconnects
-  socket.on("disconnect", () => {
-    if (users[socket.id]) {
-      socket.broadcast.emit("leave", {
-        user: "Admin",
-        message: `${users[socket.id]} has left`,
-      });
-      console.log(`${users[socket.id]} has left`);
-      delete users[socket.id]; // Remove the user from the object when they disconnect
-    }
-  });
-});
-
-server.listen(port, () => {
-  console.log("Server is working on port", port);
-});
+server.listen(port,()=>{
+    console.log(`Working ${port}`);
+})
