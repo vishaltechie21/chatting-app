@@ -2,12 +2,6 @@ Here's the updated `README.md` file with instructions to view the live chat app 
 
 ---
 
-# Chatting App - Live View
-
-To see the live view of the chatting app, visit:
-
-[Live Chat App](https://chat-app-reactjs-jade.vercel.app/)
-
 If you want to run the app locally, make sure to change the `ENDPOINT` to your server's `localhost` address and port.
 
 ### Example:
