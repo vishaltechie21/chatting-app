@@ -1,4 +1,5 @@
 Here's the updated `README.md` file with instructions to view the live chat app and change the `ENDPOINT` for local development:
+![Screenshot from 2024-10-19 19-36-12](https://github.com/user-attachments/assets/8dbe8a7f-d2c1-43a2-b1ca-8911b5fb9bb1)
 ![Screenshot from 2024-10-19 19-37-06](https://github.com/user-attachments/assets/2d2affef-2b61-44ed-94f9-19cfa248f374)
 
 ---
